@@ -1,0 +1,20 @@
+<project name="codeGen" default="mkJar">
+    <target name="init" >
+        <delete dir="build" />
+        <delete dir="jar" />
+        <mkdir dir="build"/>
+        <mkdir dir="jar" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="src" destdir="build" />
+    </target>
+
+    <target name="mkJar" depends="compile" >
+        <jar basedir="build" destfile="jar/gen.jar" >
+            <manifest>
+                <attribute name="Main-Class" value="code.main" />
+            </manifest>
+        </jar>
+    </target>
+</project>

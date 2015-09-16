@@ -1,0 +1,22 @@
+<beans>
+    <namespace name="xbean" />
+
+    <bean name="Pet" >
+        <variable name="id" type="long" default="1"/>
+        <variable name="name" type="string" />
+    </bean>
+
+    <bean name="Role" >
+        <variable name="id" type="long" />
+        <variable name="name" type="string" />
+        <variable name="petMap" type="map" key="int" value="Pet" />
+    </bean>
+
+    <bean name="User">
+        <variable name="uid" type="int" />
+        <variable name="name" type="string" />
+        <variable name="roleList" type="list" value="Role" />
+    </bean>
+
+    <dao name="UserDao" key="int" value="User" autoKey="true"/>
+</beans>
