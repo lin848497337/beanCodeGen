@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import java.io.*;
 
 /**
+ * dao生成器
  * Created by bq on 2015/9/15.
  */
 public class DataAccessObject extends CodePrintWriter{
