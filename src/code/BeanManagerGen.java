@@ -33,15 +33,15 @@ public class BeanManagerGen extends CodePrintWriter {
         print.println(String.format("public class %s{",getName()));
 
         print.println(String.format("\tprivate static %s instance = new %s();",getName(),getName()));
-        print.println(String.format("\tprivate %s face;",DBFaceGen.getName()));
+        print.println(String.format("\tprivate static ThreadLocal<%s> face = new ThreadLocal<%s>();",DBFaceGen.getName(),DBFaceGen.getName()));
 
         print.println(String.format("\tprivate %s(){}",getName()));
 
         print.println(String.format("\tpublic static %s getInstance(){ return instance; }",getName()));
 
-        print.println(String.format("\tpublic void configDBFace(%s face){ this.face = face; }",DBFaceGen.getName()));
+        print.println(String.format("\tpublic void configDBFace(%s face){ this.face.set(face); }",DBFaceGen.getName()));
 
-        print.println(String.format("\t%s getFace(){return this.face;}",DBFaceGen.getName()));
+        print.println(String.format("\t%s getFace(){return this.face.get();}",DBFaceGen.getName()));
 
 
         print.println("\tpublic static Object unSerialize(byte[] bytes) throws Exception{");
