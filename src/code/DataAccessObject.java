@@ -47,7 +47,7 @@ public class DataAccessObject extends CodePrintWriter{
 
         print.println(String.format("\tpublic static %s get(%s key){", valueType.getFullName(), keyType.getFullName()));
         print.println(String.format("\t\ttry{"));
-        print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(key);", BeanManagerGen.getName()));
+        print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(%s.class.getName()+\"_\"+key);", BeanManagerGen.getName(),getName()));
         print.println(String.format("\t\t\tbyte[] bValue = %s.getInstance().getFace().get(bKey);", BeanManagerGen.getName()));
         print.println(String.format("\t\t\tif(bValue == null) return null;"));
         print.println(String.format("\t\t\t%s value = (%s)%s.unSerialize(bValue);", valueType.getFullName(), valueType.getFullName(), BeanManagerGen.getName()));
@@ -59,7 +59,7 @@ public class DataAccessObject extends CodePrintWriter{
         print.println(String.format("\tpublic static void delete(%s key){",keyType.getFullName()));
 
         print.println(String.format("\t\ttry{"));
-        print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(key);", BeanManagerGen.getName()));
+        print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(%s.class.getName()+\"_\"+key);", BeanManagerGen.getName(), getName()));
         print.println(String.format("\t\t\t%s.getInstance().getFace().delete(bKey);", BeanManagerGen.getName()));
         print.println(String.format("\t\t}catch(Exception e){e.printStackTrace();}"));
 
@@ -68,7 +68,7 @@ public class DataAccessObject extends CodePrintWriter{
         print.println(String.format("\tpublic static void update(%s key, %s value){",keyType.getFullName(), valueType.getFullName()));
 
         print.println(String.format("\t\ttry{"));
-        print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(key);", BeanManagerGen.getName()));
+        print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(%s.class.getName()+\"_\"+key);", BeanManagerGen.getName(),getName()));
         print.println(String.format("\t\t\tBoolean isExistKey = %s.getInstance().getFace().existKey(bKey);", BeanManagerGen.getName()));
         print.println(String.format("\t\t\tif(!isExistKey) throw new RuntimeException(\"no exist key \"+key);"));
         print.println(String.format("\t\t\tbyte[] bValue = %s.serialize(value);", BeanManagerGen.getName()));
@@ -92,7 +92,7 @@ public class DataAccessObject extends CodePrintWriter{
         }else {
             print.println(String.format("\tpublic static void insert(%s key, %s value){",keyType.getFullName(), valueType.getFullName()));
             print.println(String.format("\t\ttry{"));
-            print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(key);", BeanManagerGen.getName()));
+            print.println(String.format("\t\t\tbyte[] bKey = %s.serialize(%s.class.getName()+\"_\"+key);", BeanManagerGen.getName(),this.getName()));
             print.println(String.format("\t\t\tBoolean isExistKey = %s.getInstance().getFace().existKey(bKey);", BeanManagerGen.getName()));
             print.println(String.format("\t\t\tif(isExistKey) throw new RuntimeException(\"duplicate key \"+key);"));
             print.println(String.format("\t\t\tbyte[] bValue = %s.serialize(value);", BeanManagerGen.getName()));
