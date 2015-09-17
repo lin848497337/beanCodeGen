@@ -22,7 +22,7 @@ public class DBFaceGen extends CodePrintWriter{
         print.println(String.format("\tpublic void delete(byte[] key);"));
         print.println(String.format("\tpublic long autoKey(byte[] key);"));
         print.println(String.format("\tpublic Boolean existKey(byte[] key);"));
-
+        print.println(String.format("\tpublic void watch(byte[] ...key);"));
         print.println("}");
     }
 
