@@ -1,4 +1,4 @@
-<project name="codeGen" default="mkJar">
+<project name="codeGen" default="mkJar" >
     <target name="init" >
         <delete dir="build" />
         <delete dir="jar" />
@@ -6,8 +6,16 @@
         <mkdir dir="jar" />
     </target>
 
+
     <target name="compile" depends="init">
-        <javac srcdir="src" destdir="build" />
+        <javac srcdir="src" destdir="build" encoding="UTF-8" debug="true" includeantruntime="">
+            <classpath>
+                <dirset dir="src">
+                    <include name="src/code/**/*.java"/>
+                    <exclude name="src/xbean/**/*.java" />
+                </dirset>
+            </classpath>
+        </javac>
     </target>
 
     <target name="mkJar" depends="compile" >
